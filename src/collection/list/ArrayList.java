@@ -64,7 +64,7 @@ public class ArrayList<E> extends AbstractList<E>
 
     //将ArrayList中存储元素的数组大小进行修剪，使其长度等于实际元素个数size
     public void trimToSize() {
-        //修改次数加一，这里时fast-fail机制
+        //修改次数加一，这里时fail-fast机制
         modCount++;
         //如果ArrayList的实际元素个数小于存储元素数组长度，则对数组进行修剪
         if (size < elementData.length) {
@@ -633,7 +633,7 @@ public class ArrayList<E> extends AbstractList<E>
             checkForComodification();
         }
 
-        //fast-fail机制，防止在迭代过程中，有其他线程修改ArrayList元素
+        //fail-fast机制，防止在迭代过程中，有其他线程修改ArrayList元素
         //只要list中修改次数与迭代器中记录的修改次数不一样，则抛出异常
         final void checkForComodification() {
             if (modCount != expectedModCount)
@@ -1020,7 +1020,7 @@ public class ArrayList<E> extends AbstractList<E>
         private int index; // current index, modified on advance/split
         //分割器末尾索引（不包含），-1表示到最后一个元素
         private int fence; // -1 until used; then one past last index
-        //fast-fail机制，用来判断外部是否在迭代过程中修改了元素
+        //fail-fast机制，用来判断外部是否在迭代过程中修改了元素
         private int expectedModCount; // initialized when fence set
 
         /** Create new spliterator covering the given  range */
